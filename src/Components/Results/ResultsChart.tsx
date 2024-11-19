@@ -1,9 +1,28 @@
 import { FC } from "react";
 import { ChartType, PollChartData } from "../../types";
 import { Bar, Pie } from "react-chartjs-2";
+import {
+  Chart,
+  ChartData,
+  ArcElement,
+  BarElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { Chart, ChartData } from "chart.js";
-Chart.register(ChartDataLabels);
+
+// Registrar elementos y plugins necesarios
+Chart.register(
+  ArcElement, // Necesario para gráficos de tipo "Pie"
+  BarElement, // Necesario para gráficos de tipo "Bar"
+  Tooltip, // Mostrar información al pasar el mouse
+  Legend, // Leyendas en los gráficos
+  CategoryScale, // Escala de categorías (ejes X/Y)
+  LinearScale, // Escala lineal (para barras)
+  ChartDataLabels // Plugin de etiquetas
+);
 
 interface ResultsChartProps {
   chartData: PollChartData;
@@ -55,12 +74,12 @@ const ResultsChart: FC<ResultsChartProps> = ({ chartData, chartType }) => {
           <Pie
             options={pieOptions}
             data={chartData.data as ChartData<"pie", number[], unknown>}
-          ></Pie>
+          />
         ) : (
           <Bar
             options={barOptions}
             data={chartData.data as ChartData<"bar", number[], unknown>}
-          ></Bar>
+          />
         )}
       </div>
     </div>
