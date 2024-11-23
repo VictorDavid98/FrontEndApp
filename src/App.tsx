@@ -10,18 +10,18 @@ function App() {
       <Router>
         <Navigation></Navigation>
         <Switch>
-          {
-            routes.map(route => <AppRoute 
+          {routes.map((route) => (
+            <AppRoute
               component={route.component}
               path={route.path}
               routeType={route.routeType}
               key={route.path}
               exact
-            ></AppRoute>)
-          }
+            ></AppRoute>
+          ))}
         </Switch>
       </Router>
-    </AuthProvider>    
+    </AuthProvider>
   );
 }
 

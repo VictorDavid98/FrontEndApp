@@ -1,5 +1,5 @@
 import CreatePoll from "../Pages/CreatePoll";
-import Home from "../Pages/Home";
+import LandingPage from "../Pages/LandingPage";
 import Login from "../Pages/Login";
 import NotFound from "../Pages/NotFound";
 import Register from "../Pages/Register";
@@ -11,6 +11,11 @@ import { Route } from "../types";
 const routes: Route[] = [
     {
         path: "/",
+        component: LandingPage,
+        routeType: "GUEST"
+    },
+    {
+        path: "/login",
         component: Login,
         routeType: "GUEST"
     },
