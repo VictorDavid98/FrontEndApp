@@ -69,4 +69,8 @@
         font-size: 60px;
     }
 }
-
+.custom-orange {
+  background-color: #ffc107 !important; /* Este es el color de btn-warning */
+  border-color: #ffc107 !important;
+  color: #212529 !important; /* Asegúrate de que el texto sea legible */
+}

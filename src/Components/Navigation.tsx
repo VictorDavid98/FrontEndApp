@@ -18,16 +18,26 @@ const Navigation = () => {
   return (
     <Navbar
       expand="lg"
-      className=" position-absolute w-100"
+      className="w-100 me-1"
       style={{
+        position: "absolute",
+        top: 0, // Asegurarse que esté en la parte superior
+        left: 0,
         zIndex: 10,
-        backgroundColor: "rgba(255, 255, 255, 0.5)", // Fondo blanco con 50% de opacidad
+        width: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo blanco con 50% de opacidad
         backdropFilter: "blur(5px)", // Efecto de desenfoque opcional para un mejor diseño
       }}
     >
       <Container>
-        <Navbar.Brand as={Link} to="/">
-          Encuesta
+        <Navbar.Brand
+          style={{
+            color: "white",
+          }}
+          as={Link}
+          to="/"
+        >
+          ASESORIASONLINE
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar"></Navbar.Toggle>
         <Navbar.Collapse id="navbar">
@@ -50,10 +60,19 @@ const Navigation = () => {
               </>
             ) : (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link
+                  className="btn custom-orange px-4 me-2"
+                  as={Link}
+                  to="/login"
+                >
                   Iniciar Sesión
                 </Nav.Link>
-                <Nav.Link as={Link} to="/register">
+
+                <Nav.Link
+                  className="btn custom-orange px-4"
+                  as={Link}
+                  to="/register"
+                >
                   Crear cuenta
                 </Nav.Link>
               </>
