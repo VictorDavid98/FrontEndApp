@@ -19,7 +19,11 @@ const Navigation = () => {
     <Navbar
       expand="lg"
       className=" position-absolute w-100"
-      style={{ zIndex: 0, opacity: 0.95 }}
+      style={{
+        zIndex: 10,
+        backgroundColor: "rgba(255, 255, 255, 0.5)", // Fondo blanco con 50% de opacidad
+        backdropFilter: "blur(5px)", // Efecto de desenfoque opcional para un mejor diseño
+      }}
     >
       <Container>
         <Navbar.Brand as={Link} to="/">

@@ -39,7 +39,7 @@ const Login = () => {
   return (
     <div
       style={{
-        backgroundImage: `url('https://images.pexels.com/photos/703012/pexels-photo-703012.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`, // Cambia esta ruta por la imagen que desees
+        backgroundImage: `url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`, // Cambia esta ruta por la imagen que desees
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
@@ -51,7 +51,7 @@ const Login = () => {
     >
       <Card
         className="p-4"
-        style={{ maxWidth: "400px", width: "100%", zIndex: 5, opacity: 0.95 }}
+        style={{ maxWidth: "400px", width: "100%", zIndex: 5, opacity: 0.9 }}
       >
         <Card.Body>
           <h4 className="text-center">Iniciar sesión</h4>
