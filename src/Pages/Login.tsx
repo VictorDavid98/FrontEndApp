@@ -1,6 +1,4 @@
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -39,79 +37,69 @@ const Login = () => {
   };
 
   return (
-    <Container
-      fluid
-      className="vh-100 d-flex align-items-center justify-content-center"
+    <div
+      style={{
+        backgroundImage: `url('https://images.pexels.com/photos/703012/pexels-photo-703012.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`, // Cambia esta ruta por la imagen que desees
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <Row className="w-100">
-        {/* Columna de la imagen */}
-        <Col md={6} className="d-none d-md-block">
-          <div
-            style={{
-              backgroundImage: `url('https://images.pexels.com/photos/703012/pexels-photo-703012.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "100vh",
-            }}
-          ></div>
-        </Col>
-
-        {/* Columna del formulario */}
-        <Col
-          md={6}
-          sm={12}
-          className="d-flex align-items-center justify-content-center"
-        >
-          <Card className="p-4" style={{ maxWidth: "400px", width: "100%" }}>
-            <Card.Body>
-              <h4 className="text-center">Iniciar sesión</h4>
-              <hr />
-              <Form onSubmit={login}>
-                <Form.Group className="mb-3" controlId="email">
-                  <Form.Label>Correo electrónico</Form.Label>
-                  <Form.Control
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="email"
-                    placeholder="e.g. john@gmail.com"
+      <Card
+        className="p-4"
+        style={{ maxWidth: "400px", width: "100%", zIndex: 5, opacity: 0.95 }}
+      >
+        <Card.Body>
+          <h4 className="text-center">Iniciar sesión</h4>
+          <hr />
+          <Form onSubmit={login}>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Correo electrónico</Form.Label>
+              <Form.Control
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="e.g. john@gmail.com"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                placeholder="*********"
+              />
+            </Form.Group>
+            <Button type="submit" className="w-100">
+              {sendingData ? (
+                <>
+                  <Spinner
+                    animation="border"
+                    as="span"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
                   />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="password">
-                  <Form.Label>Contraseña</Form.Label>
-                  <Form.Control
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    type="password"
-                    placeholder="*********"
-                  />
-                </Form.Group>
-                <Button type="submit" className="w-100">
-                  {sendingData ? (
-                    <>
-                      <Spinner
-                        animation="border"
-                        as="span"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                      />
-                      &nbsp; Iniciando sesión...
-                    </>
-                  ) : (
-                    "Iniciar sesión"
-                  )}
-                </Button>
-              </Form>
-              {error && (
-                <Alert className="mt-4" show={!!error} variant="danger">
-                  {error}
-                </Alert>
+                  &nbsp; Iniciando sesión...
+                </>
+              ) : (
+                "Iniciar sesión"
               )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+            </Button>
+          </Form>
+          {error && (
+            <Alert className="mt-4" show={!!error} variant="danger">
+              {error}
+            </Alert>
+          )}
+        </Card.Body>
+      </Card>
+    </div>
   );
 };
 

@@ -16,7 +16,11 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar
+      expand="lg"
+      className=" position-absolute w-100"
+      style={{ zIndex: 0, opacity: 0.95 }}
+    >
       <Container>
         <Navbar.Brand as={Link} to="/">
           Encuesta
