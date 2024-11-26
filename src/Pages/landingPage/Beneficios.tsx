@@ -7,7 +7,7 @@ const BeneficiosSection: React.FC = () => {
       titulo: "Planes Personalizados",
       descripcion:
         "Recibe un plan de entrenamiento diseñado exclusivamente para ti, adaptado a tu nivel, metas y estilo de vida.",
-      icono: "🏋️‍♂️", // Puedes reemplazar con un ícono de librería como FontAwesome o Material Icons
+      icono: "🏋️‍♂️",
     },
     {
       titulo: "Seguimiento Profesional",
@@ -42,14 +42,15 @@ const BeneficiosSection: React.FC = () => {
   ];
 
   return (
-    <div
-      style={{
-        backgroundColor: "#f8f9fa",
-        padding: "60px 0",
-      }}
-    >
+    <div>
       <Container>
-        <h2 className="text-center mb-5" style={{ fontWeight: "bold" }}>
+        <h2
+          className="text-center mb-5"
+          style={{
+            fontWeight: "bold",
+            color: "#ff8c00", // Naranjo brillante
+          }}
+        >
           ¿Por qué elegirnos?
         </h2>
         <Row className="g-4">
@@ -58,7 +59,9 @@ const BeneficiosSection: React.FC = () => {
               <Card
                 style={{
                   border: "none",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  backgroundColor: "#2e2e2e", // Gris oscuro
+                  color: "white",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)", // Sutil sombra
                   height: "100%",
                 }}
               >
@@ -66,16 +69,22 @@ const BeneficiosSection: React.FC = () => {
                   <div
                     style={{
                       fontSize: "50px",
-                      color: "#ff8c00",
+                      color: "#ff8c00", // Ícono en naranjo
                       marginBottom: "15px",
                     }}
                   >
                     {beneficio.icono}
                   </div>
-                  <Card.Title style={{ fontWeight: "bold", fontSize: "18px" }}>
+                  <Card.Title
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "18px",
+                      color: "#ff8c00", // Título en naranjo
+                    }}
+                  >
                     {beneficio.titulo}
                   </Card.Title>
-                  <Card.Text style={{ color: "#6c757d" }}>
+                  <Card.Text style={{ color: "#c4c4c4" }}>
                     {beneficio.descripcion}
                   </Card.Text>
                 </Card.Body>
