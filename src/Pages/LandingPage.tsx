@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
+import BeneficiosSection from "./landingPage/Beneficios";
 
 const LandingPage: React.FC = () => {
   const sectionsRef = useRef<HTMLDivElement[]>([]); // Referencia a las secciones
@@ -119,10 +120,10 @@ const LandingPage: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#f8f9fa",
+          backgroundColor: "#e9ecef",
         }}
       >
-        <h1>Beneficios principales</h1>
+        <BeneficiosSection />
       </div>
 
       {/* Sección 3: Testimonios */}
@@ -136,7 +137,7 @@ const LandingPage: React.FC = () => {
           backgroundColor: "#e9ecef",
         }}
       >
-        <h1>Lo que dicen nuestros clientes</h1>
+        <h1>Lo que nuestros clientes piensan</h1>
       </div>
 
       {/* Sección 4: Contacto */}
