@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CREATE_POLL_ENDPOINT, CREATE_POLL_REPLY_ENDPOINT, DELETE_POLL_ENDPOINT, GET_POLL_RESULTS_ENDPOINT, GET_POLL_WITH_QUESTIONS_ENDPOINT, GET_USER_POLLS_ENDPOINT, TOGGLE_POLL_OPENED_ENDPOINT } from "../utils/endpoints";
+import { CREATE_POLL_ENDPOINT, CREATE_POLL_REPLY_ENDPOINT, DELETE_POLL_ENDPOINT, GET_POLL_RESULTS_ENDPOINT, GET_POLL_WITH_QUESTIONS_ENDPOINT, GET_USER_POLLS_ENDPOINT, TOGGLE_POLL_OPENED_ENDPOINT, GET_USER_ADMIN, GET_PROFESIONALES_ADMIN } from "../utils/endpoints";
 import { PollReply } from "../types";
 
 
@@ -30,3 +30,9 @@ export const deletePoll = (id: string) => {
 export const getPollResults = (id: string) => {
     return axios.get(GET_POLL_RESULTS_ENDPOINT(id));
 }
+export const getUserAdmin = () => {
+    return axios.get(GET_USER_ADMIN);
+};
+export const getProfesionalesAdmin = () => {
+    return axios.get(GET_PROFESIONALES_ADMIN);
+};

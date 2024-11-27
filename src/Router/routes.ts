@@ -6,6 +6,8 @@ import Register from "../Pages/Register";
 import ReplyPoll from "../Pages/ReplyPoll";
 import Results from "../Pages/Results";
 import User from "../Pages/User";
+import AdminPage from "../Pages/Administrador/InicioAdmin";
+import VerUsuariosAdmin from "../Pages/Administrador/VerUsuariosAdmin";
 import { Route } from "../types";
 
 const routes: Route[] = [
@@ -27,6 +29,16 @@ const routes: Route[] = [
     {
         path: "/user",
         component: User,
+        routeType: "PRIVATE"
+    },
+    {
+        path: "/admin",
+        component: AdminPage,
+        routeType: "PRIVATE"
+    },
+    {
+        path: "/verusuariosadmin",
+        component: VerUsuariosAdmin,
         routeType: "PRIVATE"
     },
     {
