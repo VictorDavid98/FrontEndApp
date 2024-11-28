@@ -25,7 +25,7 @@ const Navigation = () => {
         expand="lg"
         className="w-100"
         style={{
-          position: "absolute",
+          position: "fixed",
           top: 0,
           left: 0,
           zIndex: 10,
@@ -67,8 +67,11 @@ const Navigation = () => {
                   <Nav.Link as={Link} to="/createpoll" className="text-white">
                     Crear encuesta
                   </Nav.Link>
-                  <NavDropdown title={user.email} id="nav-dropdown">
-                    <NavDropdown.Item as={Link} to="/admin">
+                  <NavDropdown
+                    title={<span style={{ color: "white" }}>{user.email}</span>}
+                    id="nav-dropdown"
+                  >
+                    <NavDropdown.Item as={Link} to="/replypoll/:id">
                       Mis encuestas
                     </NavDropdown.Item>
                     <NavDropdown.Divider />

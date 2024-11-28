@@ -1,1 +1,1 @@
-export type AuthActions = { type: 'login', token: string } | { type: 'logout' };
+export type AuthActions = { type: 'login', token: string } | { type: 'logout' }  | { type: "updateRole"; role: string };; 

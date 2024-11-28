@@ -3,6 +3,7 @@ import LandingPage from "../Pages/LandingPage";
 import Login from "../Pages/Login";
 import NotFound from "../Pages/NotFound";
 import Register from "../Pages/Register";
+import Unauthorized from "../Pages/UnauthorizedPage";
 import ReplyPoll from "../Pages/ReplyPoll";
 import Results from "../Pages/Results";
 import User from "../Pages/User";
@@ -10,7 +11,13 @@ import AdminPage from "../Pages/Administrador/InicioAdmin";
 import VerUsuariosAdmin from "../Pages/Administrador/VerUsuariosAdmin";
 import { Route } from "../types";
 
+
+
+
+
 const routes: Route[] = [
+
+   
     {
         path: "/",
         component: LandingPage,
@@ -27,24 +34,34 @@ const routes: Route[] = [
         routeType: "GUEST"
     },
     {
+        path: "/unauthorized",
+        component: Unauthorized,
+        routeType: "PRIVATE"
+    },
+    {
         path: "/user",
         component: User,
-        routeType: "PRIVATE"
+        routeType: "PRIVATE",
+        allowedRoles: ["ROLE_USER"]
+      
     },
     {
         path: "/admin",
         component: AdminPage,
-        routeType: "PRIVATE"
+        routeType: "PRIVATE",
+        allowedRoles: ["ROLE_ADMIN"]
     },
     {
         path: "/verusuariosadmin",
         component: VerUsuariosAdmin,
-        routeType: "PRIVATE"
+        routeType: "PRIVATE",
+       
     },
     {
         path: "/createpoll",
         component: CreatePoll,
-        routeType: "PRIVATE"
+        routeType: "PRIVATE",
+        
     },
     {
         path: "/replypoll/:id",
@@ -54,13 +71,15 @@ const routes: Route[] = [
     {
         path: "/results/:id",
         component: Results,
-        routeType: "PRIVATE"
+        routeType: "PRIVATE",
+        
     },
     {
         path: "*",
         component: NotFound,
         routeType: "PUBLIC"
     }
-]
+    
+];
 
 export default routes;

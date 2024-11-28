@@ -15,6 +15,7 @@ function App() {
               component={route.component}
               path={route.path}
               routeType={route.routeType}
+              allowedRoles={route.allowedRoles}
               key={route.path}
               exact
             ></AppRoute>

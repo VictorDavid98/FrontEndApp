@@ -6,7 +6,9 @@ const TOKEN_KEY = "token";
 const defaultUser: User = {
     email: "",
     isAuthenticated: false,
-    token: ""
+    token: "",
+    role: ""
+    
 };
 
 const setToken = (token: string) => {
@@ -32,7 +34,9 @@ export const authenticate = (token?: string): User => {
         return {...defaultUser};
     }
 
+    
     const decoded: any = jwt_decode(_token);
+    
     const currentTime = Date.now() / 1000;
 
     if (decoded.exp < currentTime) {
@@ -42,7 +46,12 @@ export const authenticate = (token?: string): User => {
 
     axios.defaults.headers.common["Authorization"] = _token;
 
-    return {...defaultUser, email: decoded.sub, isAuthenticated: true, token: _token};
+    const role = decoded.role || '';
+   
+    
+    
+
+    return {...defaultUser, email: decoded.sub, isAuthenticated: true, token: _token, role: role,};
 }
 
 export const logout = (): User => {

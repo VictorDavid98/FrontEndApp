@@ -3,7 +3,9 @@ import { ChartData } from "chart.js";
 export type User = {
     email: string,
     token: string,
-    isAuthenticated: boolean
+    isAuthenticated: boolean,
+    role: string;
+
 };
 
 export type Poll = {
@@ -34,7 +36,8 @@ export type RouteType = "PRIVATE" | "PUBLIC" | "GUEST";
 export type Route = {
     path: string,
     component: any,
-    routeType: RouteType
+    routeType: RouteType,
+    allowedRoles?: string[];
 };
 
 export type UserAnswer = {
