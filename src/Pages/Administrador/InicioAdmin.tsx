@@ -33,9 +33,40 @@ const localizer = momentLocalizer(moment);
 
 const InicioAdmin: React.FC = () => {
   const [profesionales, setProfesionales] = useState<any[]>([]); // Estado para los profesionales
+  const [usuarios, setUsuarios] = useState<any[]>([]); // Estado para los profesionales
   const [loading, setLoading] = useState(true); // Estado de carga
   const [events, setEvents] = useState<any[]>([]); // Estado para los eventos del calendario
 
+  // Obtener los profesionales al cargar la página
+  useEffect(() => {
+    const fetchProfesionales = async () => {
+      try {
+        const response = await getProfesionalesAdmin(); // Llamada al servicio para obtener los profesionales
+        setProfesionales(response.data);
+      } catch (error) {
+        console.error("Error al obtener los profesionales:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfesionales();
+  }, []);
+  // Obtener los profesionales al cargar la página
+  useEffect(() => {
+    const fetchUsuarios = async () => {
+      try {
+        const response = await getUserAdmin(); // Llamada al servicio para obtener los profesionales
+        setUsuarios(response.data);
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsuarios();
+  }, []);
   // Datos para el gráfico
   const chartData = {
     labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
@@ -115,22 +146,6 @@ const InicioAdmin: React.FC = () => {
     // Navega a una vista detallada o abre un modal
   };
 
-  // Obtener los profesionales al cargar la página
-  useEffect(() => {
-    const fetchProfesionales = async () => {
-      try {
-        const response = await getUserAdmin(); // Llamada al servicio para obtener los profesionales
-        setProfesionales(response.data);
-      } catch (error) {
-        console.error("Error al obtener los profesionales:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfesionales();
-  }, []);
-
   // Ejemplo de eventos para el calendario
   useEffect(() => {
     const fetchEvents = () => {
@@ -168,7 +183,6 @@ const InicioAdmin: React.FC = () => {
       </h1>
 
       <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
-        {/* Tabla de profesionales */}
         {/* Tabla de profesionales */}
         <div
           style={{
@@ -244,85 +258,228 @@ const InicioAdmin: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {profesionales.map((prof: any) => (
-                <tr key={prof.id} style={{ backgroundColor: "#262626" }}>
-                  <td style={{ padding: "10px", border: "1px solid #333" }}>
-                    {prof.id}
-                  </td>
-                  <td style={{ padding: "10px", border: "1px solid #333" }}>
-                    {prof.name}
-                  </td>
-                  <td style={{ padding: "10px", border: "1px solid #333" }}>
-                    {prof.email}
-                  </td>
-                  <td style={{ padding: "10px", border: "1px solid #333" }}>
-                    {prof.role.roleName}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      border: "1px solid #333",
-                      textAlign: "center",
-                    }}
-                  >
-                    <button
+              {Array.isArray(profesionales) &&
+                profesionales?.map((prof: any) => (
+                  <tr key={prof.id} style={{ backgroundColor: "#262626" }}>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {prof.id}
+                    </td>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {prof.name}
+                    </td>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {prof.email}
+                    </td>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {prof.role.roleName}
+                    </td>
+                    <td
                       style={{
-                        background: "transparent",
-                        border: "none",
-                        color: "#ff7f0e",
-                        cursor: "pointer",
-                        margin: "0 5px",
+                        padding: "10px",
+                        border: "1px solid #333",
+                        textAlign: "center",
                       }}
-                      title="Editar"
-                      onClick={() => handleEdit(prof.id)}
                     >
-                      <FaEdit />
-                    </button>
-                    <button
-                      style={{
-                        background: "transparent",
-                        border: "none",
-                        color: "#e74c3c",
-                        cursor: "pointer",
-                        margin: "0 5px",
-                      }}
-                      title="Eliminar"
-                      onClick={() => handleDelete(prof.id)}
-                    >
-                      <FaTrashAlt />
-                    </button>
-                    <button
-                      style={{
-                        background: "transparent",
-                        border: "none",
-                        color: "#3498db",
-                        cursor: "pointer",
-                        margin: "0 5px",
-                      }}
-                      title="Ver Información"
-                      onClick={() => handleViewInfo(prof.id)}
-                    >
-                      <FaInfoCircle />
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                      <button
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "#ff7f0e",
+                          cursor: "pointer",
+                          margin: "0 5px",
+                        }}
+                        title="Editar"
+                        onClick={() => handleEdit(prof.id)}
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "#e74c3c",
+                          cursor: "pointer",
+                          margin: "0 5px",
+                        }}
+                        title="Eliminar"
+                        onClick={() => handleDelete(prof.id)}
+                      >
+                        <FaTrashAlt />
+                      </button>
+                      <button
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "#3498db",
+                          cursor: "pointer",
+                          margin: "0 5px",
+                        }}
+                        title="Ver Información"
+                        onClick={() => handleViewInfo(prof.id)}
+                      >
+                        <FaInfoCircle />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
-
-        {/* Gráfico */}
-        <div style={{ flex: "2", width: "40%", minWidth: "300px" }}>
-          <h2 style={{ color: "#ff7f0e" }}>
-            📊 Gráfico de Usuarios Registrados
-          </h2>
-          <Bar data={chartData} options={chartOptions} />
+        <div
+          style={{
+            flex: "2",
+            justifyContent: "center",
+            minWidth: "300px",
+            marginRight: "20px",
+            padding: "20px",
+            backgroundColor: "#2b2b2b",
+            borderRadius: "10px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          <h2 style={{ color: "#ff7f0e", textAlign: "center" }}>👨‍⚖️ usuarios</h2>
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              backgroundColor: "#1f1f1f",
+              borderRadius: "8px",
+              overflow: "hidden",
+            }}
+          >
+            <thead>
+              <tr>
+                <th
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #333",
+                    color: "white",
+                  }}
+                >
+                  ID
+                </th>
+                <th
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #333",
+                    color: "white",
+                  }}
+                >
+                  Nombre
+                </th>
+                <th
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #333",
+                    color: "white",
+                  }}
+                >
+                  Email
+                </th>
+                <th
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #333",
+                    color: "white",
+                  }}
+                >
+                  Rol
+                </th>
+                <th
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #333",
+                    color: "white",
+                  }}
+                >
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.isArray(usuarios) &&
+                usuarios?.map((user: any) => (
+                  <tr key={user.id} style={{ backgroundColor: "#262626" }}>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {user.id}
+                    </td>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {user.name}
+                    </td>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {user.email}
+                    </td>
+                    <td style={{ padding: "10px", border: "1px solid #333" }}>
+                      {user.role.roleName}
+                    </td>
+                    <td
+                      style={{
+                        padding: "10px",
+                        border: "1px solid #333",
+                        textAlign: "center",
+                      }}
+                    >
+                      <button
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "#ff7f0e",
+                          cursor: "pointer",
+                          margin: "0 5px",
+                        }}
+                        title="Editar"
+                        onClick={() => handleEdit(user.id)}
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "#e74c3c",
+                          cursor: "pointer",
+                          margin: "0 5px",
+                        }}
+                        title="Eliminar"
+                        onClick={() => handleDelete(user.id)}
+                      >
+                        <FaTrashAlt />
+                      </button>
+                      <button
+                        style={{
+                          background: "transparent",
+                          border: "none",
+                          color: "#3498db",
+                          cursor: "pointer",
+                          margin: "0 5px",
+                        }}
+                        title="Ver Información"
+                        onClick={() => handleViewInfo(user.id)}
+                      >
+                        <FaInfoCircle />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "60px" }}>
         {/* Calendario */}
-        <div style={{ flex: "1", marginTop: "50px" }}>
+        <div
+          style={{
+            flex: "1",
+            justifyContent: "center",
+            minWidth: "300px",
+            marginRight: "20px",
+            padding: "20px",
+            backgroundColor: "#2b2b2b",
+            borderRadius: "10px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+          }}
+        >
           <h2 style={{ color: "#ff7f0e" }}>📅 Calendario</h2>
           <div style={{ height: "300px", backgroundColor: "#fff" }}>
             <Calendar
@@ -339,7 +496,36 @@ const InicioAdmin: React.FC = () => {
             />
           </div>
         </div>
-        <div style={{ flex: "1", width: "40%", minWidth: "300px" }}>
+        {/* Gráfico usuarios registrados */}
+        <div
+          style={{
+            flex: "1",
+            justifyContent: "center",
+            minWidth: "300px",
+            marginRight: "20px",
+            padding: "20px",
+            backgroundColor: "#2b2b2b",
+            borderRadius: "10px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          <h2 style={{ color: "#ff7f0e" }}>
+            📊 Gráfico de Usuarios Registrados
+          </h2>
+          <Bar data={chartData} options={chartOptions} />
+        </div>
+        <div
+          style={{
+            flex: "1",
+            justifyContent: "center",
+            minWidth: "300px",
+            marginRight: "20px",
+            padding: "20px",
+            backgroundColor: "#2b2b2b",
+            borderRadius: "10px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
+          }}
+        >
           <h2 style={{ color: "#ff7f0e" }}>⚠️ Usuarios con Bajo Rendimiento</h2>
           <Bar data={lowPerformanceData} options={lowPerformanceOptions} />
         </div>

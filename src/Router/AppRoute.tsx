@@ -37,7 +37,7 @@ const AppRoute = (props: AppRouteProps) => {
         if (!user.isAuthenticated) {
           return <Component {...routeProps} />;
         } else {
-          return <Redirect to="/user" />;
+          return <Redirect to="/admin" />;
         }
 
       case "PUBLIC":
