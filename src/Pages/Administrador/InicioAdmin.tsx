@@ -271,7 +271,7 @@ const InicioAdmin: React.FC = () => {
                       {prof.email}
                     </td>
                     <td style={{ padding: "10px", border: "1px solid #333" }}>
-                      {prof.role.roleName}
+                      {prof.roleName}
                     </td>
                     <td
                       style={{
@@ -410,7 +410,7 @@ const InicioAdmin: React.FC = () => {
                       {user.email}
                     </td>
                     <td style={{ padding: "10px", border: "1px solid #333" }}>
-                      {user.role.roleName}
+                      {user.roleName}
                     </td>
                     <td
                       style={{
