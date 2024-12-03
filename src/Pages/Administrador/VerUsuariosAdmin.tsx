@@ -3,6 +3,7 @@ import {
   getProfesionalesAdmin,
   getUserAdmin,
   getAllRolUsers,
+  getUsuariosAsignadoProfesional,
 } from "../../services/PollService";
 
 import { FaEdit, FaTrashAlt, FaInfoCircle, FaUsers } from "react-icons/fa";
@@ -12,6 +13,7 @@ const VerUsuariosAdmin: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState(""); // Estado para búsqueda
   const [selectedProfessional, setSelectedProfessional] = useState<any>(null); // Profesional seleccionado
+  const [assignedUsers, setAssignedUsers] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -42,6 +44,22 @@ const VerUsuariosAdmin: React.FC = () => {
     console.log(`Ver información del usuario con ID: ${id}`);
   };
 
+  useEffect(() => {
+    const fetchAssignedUsers = async () => {
+      if (!selectedProfessional) return; // Asegurarse de que hay un profesional seleccionado
+
+      try {
+        const response = await getUsuariosAsignadoProfesional(
+          selectedProfessional.id
+        );
+        setAssignedUsers(response.data);
+      } catch (error) {
+        console.error("Error al obtener los usuarios asignados:", error);
+      }
+    };
+
+    fetchAssignedUsers();
+  }, [selectedProfessional]);
   const handleShowAssignedUsers = (professional: any) => {
     setSelectedProfessional(professional);
   };
@@ -212,6 +230,32 @@ const VerUsuariosAdmin: React.FC = () => {
                       >
                         <FaUsers />
                       </button>
+                    )}
+
+                    {selectedProfessional && (
+                      <div className="modal">
+                        <div className="modal-content">
+                          <h2>
+                            Usuarios asignados a {selectedProfessional.name}
+                          </h2>
+                          <ul>
+                            {assignedUsers.length > 0 ? (
+                              assignedUsers.map((user) => (
+                                <li key={user.id}>
+                                  {user.name} ({user.email})
+                                </li>
+                              ))
+                            ) : (
+                              <p>
+                                No hay usuarios asignados a este profesional.
+                              </p>
+                            )}
+                          </ul>
+                          <button onClick={() => setSelectedProfessional(null)}>
+                            Cerrar
+                          </button>
+                        </div>
+                      </div>
                     )}
                   </td>
                 </tr>
